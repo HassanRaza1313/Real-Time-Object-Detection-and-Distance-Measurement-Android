@@ -111,13 +111,13 @@ This application uses the following dependencies:
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-<img src="images/Start.PNG" alt="Logo" width="700" height="700">
-<img src="images/Choice.PNG" alt="Logo" width="700" height="700">
-<img src="images/Detection 1.PNG" alt="Logo" width="700" height="700">
-<img src="images/Detection 2.PNG" alt="Logo" width="700" height="700">
-<img src="images/Detection 3.PNG" alt="Logo" width="700" height="700">
-<img src="images/Distance1.PNG" alt="Logo" width="700" height="700">
-<img src="images/Distance23.PNG" alt="Logo" width="700" height="700">
+<img src="images/Start.PNG" alt="Logo" width="500" height="1000">
+<img src="images/Choice.PNG" alt="Logo" width="500" height="1000">
+<img src="images/Detection 1.PNG" alt="Logo" width="500" height="1000">
+<img src="images/Detection 2.PNG" alt="Logo" width="500" height="1000">
+<img src="images/Detection 3.PNG" alt="Logo" width="500" height="1000">
+<img src="images/Distance1.PNG" alt="Logo" width="500" height="1000">
+<img src="images/Distance23.PNG" alt="Logo" width="500" height="1000">
 
 
 <!-- ROADMAP -->
