@@ -82,8 +82,11 @@ The Problem is that blind and visually impaired people commute and travel in the
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+* Download and setup Android Studio on your system.
+* Download the project files from this repository.
+* Load the project on Android Studio and sync Gradle files.
+* Your project is up-and-running.
+
 
 ### Prerequisites
 
