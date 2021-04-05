@@ -1,0 +1,54 @@
+<html>
+<head>
+<title>Audio.kt</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #6a8759;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Audio.kt</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com.example.fyp</span>
+
+<span class="s1">import android.content.Context</span>
+<span class="s1">import android.speech.tts.TextToSpeech</span>
+<span class="s1">import android.util.Log</span>
+<span class="s1">import java.util.*</span>
+
+<span class="s0">class </span><span class="s1">Audio: TextToSpeech.OnInitListener {</span>
+
+    <span class="s1">private </span><span class="s0">val </span><span class="s1">ctx: Context</span>
+    <span class="s1">private </span><span class="s0">val </span><span class="s1">loc: Locale</span>
+    <span class="s1">private </span><span class="s0">val </span><span class="s1">tts : TextToSpeech</span>
+
+    <span class="s1">constructor(context : Context</span><span class="s0">, </span><span class="s1">countryCode: String</span><span class="s0">, </span><span class="s1">regionCode : String) {</span>
+        <span class="s1">ctx = context</span>
+        <span class="s1">loc = Locale(countryCode</span><span class="s0">, </span><span class="s1">regionCode)</span>
+        <span class="s1">tts = TextToSpeech(ctx</span><span class="s0">, this</span><span class="s1">)</span>
+    <span class="s1">}</span>
+
+    <span class="s1">override </span><span class="s0">fun </span><span class="s1">onInit(status: Int) {</span>
+        <span class="s0">if </span><span class="s1">(status == TextToSpeech.SUCCESS) {</span>
+            <span class="s0">val </span><span class="s1">result = tts.setLanguage(loc)</span>
+            <span class="s0">if </span><span class="s1">(result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {</span>
+                <span class="s1">Log.i(</span><span class="s2">&quot;TTS&quot;</span><span class="s0">, </span><span class="s2">&quot;This Language is not supported&quot;</span><span class="s1">)</span>
+            <span class="s1">} </span><span class="s0">else </span><span class="s1">{</span>
+                <span class="s1">Log.i(</span><span class="s2">&quot;TTS&quot;</span><span class="s0">, </span><span class="s2">&quot;Initilization Success!&quot;</span><span class="s1">)</span>
+            <span class="s1">}</span>
+        <span class="s1">} </span><span class="s0">else </span><span class="s1">{</span>
+            <span class="s1">Log.e(</span><span class="s2">&quot;TTS&quot;</span><span class="s0">, </span><span class="s2">&quot;Initilization Failed!&quot;</span><span class="s1">)</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+    <span class="s0">fun </span><span class="s1">generate_audio(value: String) {</span>
+        <span class="s1">tts.speak(value</span><span class="s0">, </span><span class="s1">TextToSpeech.QUEUE_FLUSH</span><span class="s0">, null, null</span><span class="s1">)</span>
+    <span class="s1">}</span>
+<span class="s1">}</span></pre>
+</body>
+</html>

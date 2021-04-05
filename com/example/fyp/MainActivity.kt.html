@@ -1,0 +1,41 @@
+<html>
+<head>
+<title>MainActivity.kt</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #6a8759;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+MainActivity.kt</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com.example.fyp</span>
+
+<span class="s1">import android.content.Intent</span>
+<span class="s1">import androidx.appcompat.app.AppCompatActivity</span>
+<span class="s1">import android.os.Bundle</span>
+<span class="s1">import android.widget.ImageButton</span>
+
+<span class="s0">class </span><span class="s1">MainActivity : AppCompatActivity() {</span>
+    <span class="s1">override </span><span class="s0">fun </span><span class="s1">onCreate(savedInstanceState: Bundle?) {</span>
+        <span class="s0">super</span><span class="s1">.onCreate(savedInstanceState)</span>
+        <span class="s1">setContentView(R.layout.activity_main)</span>
+        <span class="s0">val </span><span class="s1">button = findViewById&lt;ImageButton&gt;(R.id.start)</span>
+        <span class="s0">val </span><span class="s1">sp = Audio(</span><span class="s0">this,</span><span class="s2">&quot;en&quot;</span><span class="s0">,</span><span class="s2">&quot;GB&quot;</span><span class="s1">)</span>
+        <span class="s1">sp!!.generate_audio(</span><span class="s2">&quot;Welcome to BlindVision.Tap on the screen to start.&quot;</span><span class="s1">)</span>
+
+
+        <span class="s1">button.setOnClickListener {</span>
+            <span class="s1">sp!!.generate_audio(</span><span class="s2">&quot;Choose your requirement&quot;</span><span class="s1">)</span>
+            <span class="s0">val </span><span class="s1">intent = Intent(</span><span class="s0">this, </span><span class="s1">ChoiceActivity::</span><span class="s0">class</span><span class="s1">.java)</span>
+            <span class="s1">startActivity(intent)</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+<span class="s1">}</span></pre>
+</body>
+</html>

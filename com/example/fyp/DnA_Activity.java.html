@@ -1,0 +1,150 @@
+<html>
+<head>
+<title>DnA_Activity.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #6a8759;}
+.s3 { color: #808080;}
+.s4 { color: #6897bb;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+DnA_Activity.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com.example.fyp</span><span class="s0">;</span>
+
+<span class="s0">import </span><span class="s1">androidx.appcompat.app.AppCompatActivity</span><span class="s0">;</span>
+
+<span class="s0">import </span><span class="s1">android.os.Bundle</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.speech.tts.TextToSpeech</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.util.Log</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.widget.TextView</span><span class="s0">;</span>
+
+<span class="s0">import </span><span class="s1">com.google.ar.core.Anchor</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.google.ar.core.Frame</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.google.ar.core.Pose</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.google.ar.sceneform.AnchorNode</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.google.ar.sceneform.FrameTime</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.google.ar.sceneform.Scene</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.google.ar.sceneform.math.Vector3</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.google.ar.sceneform.rendering.Color</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.google.ar.sceneform.rendering.MaterialFactory</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.google.ar.sceneform.rendering.ModelRenderable</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.google.ar.sceneform.rendering.ShapeFactory</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.google.ar.sceneform.ux.ArFragment</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.google.ar.sceneform.ux.TransformableNode</span><span class="s0">;</span>
+
+<span class="s0">import </span><span class="s1">java.text.DecimalFormat</span><span class="s0">;</span>
+
+<span class="s0">public class </span><span class="s1">DnA_Activity </span><span class="s0">extends </span><span class="s1">AppCompatActivity </span><span class="s0">implements </span><span class="s1">Scene.OnUpdateListener{</span>
+
+    <span class="s0">private </span><span class="s1">ArFragment arFragment</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">AnchorNode currentAnchorNode</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">TextView tvDistance</span><span class="s0">;</span>
+    <span class="s1">ModelRenderable cubeRenderable</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">Anchor currentAnchor = </span><span class="s0">null;</span>
+    <span class="s1">Audio audio</span><span class="s0">;</span>
+    <span class="s0">private static </span><span class="s1">DecimalFormat df = </span><span class="s0">new </span><span class="s1">DecimalFormat(</span><span class="s2">&quot;0.00&quot;</span><span class="s1">)</span><span class="s0">;</span>
+
+    <span class="s1">@Override</span>
+    <span class="s0">protected void </span><span class="s1">onCreate(Bundle savedInstanceState) {</span>
+        <span class="s0">super</span><span class="s1">.onCreate(savedInstanceState)</span><span class="s0">;</span>
+        <span class="s1">setContentView(R.layout.activity_dn_a_)</span><span class="s0">;</span>
+        <span class="s1">audio = </span><span class="s0">new </span><span class="s1">Audio(</span><span class="s0">this,</span><span class="s2">&quot;en&quot;</span><span class="s0">,</span><span class="s2">&quot;GB&quot;</span><span class="s1">)</span><span class="s0">;</span>
+
+        <span class="s1">arFragment = (ArFragment) getSupportFragmentManager().findFragmentById(R.id.fragment)</span><span class="s0">;</span>
+        <span class="s1">tvDistance = findViewById(R.id.textView)</span><span class="s0">;</span>
+
+
+        <span class="s1">initModel()</span><span class="s0">;</span>
+
+        <span class="s1">arFragment.setOnTapArPlaneListener((hitResult</span><span class="s0">, </span><span class="s1">plane</span><span class="s0">, </span><span class="s1">motionEvent) -&gt; {</span>
+            <span class="s0">if </span><span class="s1">(cubeRenderable == </span><span class="s0">null</span><span class="s1">)</span>
+                <span class="s0">return;</span>
+
+            <span class="s3">// Creating Anchor.</span>
+            <span class="s1">Anchor anchor = hitResult.createAnchor()</span><span class="s0">;</span>
+            <span class="s1">AnchorNode anchorNode = </span><span class="s0">new </span><span class="s1">AnchorNode(anchor)</span><span class="s0">;</span>
+            <span class="s1">anchorNode.setParent(arFragment.getArSceneView().getScene())</span><span class="s0">;</span>
+
+            <span class="s1">clearAnchor()</span><span class="s0">;</span>
+
+            <span class="s1">currentAnchor = anchor</span><span class="s0">;</span>
+            <span class="s1">currentAnchorNode = anchorNode</span><span class="s0">;</span>
+
+
+            <span class="s1">TransformableNode node = </span><span class="s0">new </span><span class="s1">TransformableNode(arFragment.getTransformationSystem())</span><span class="s0">;</span>
+            <span class="s1">node.setRenderable(cubeRenderable)</span><span class="s0">;</span>
+            <span class="s1">node.setParent(anchorNode)</span><span class="s0">;</span>
+
+
+            <span class="s1">arFragment.getArSceneView().getScene().addOnUpdateListener(</span><span class="s0">this</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">arFragment.getArSceneView().getScene().addChild(anchorNode)</span><span class="s0">;</span>
+            <span class="s1">node.select()</span><span class="s0">;</span>
+
+            <span class="s1">audio.generate_audio((String) tvDistance.getText())</span><span class="s0">;</span>
+        <span class="s1">})</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">private void </span><span class="s1">initModel() {</span>
+        <span class="s1">MaterialFactory.makeTransparentWithColor(</span><span class="s0">this, new </span><span class="s1">Color(android.graphics.Color.RED))</span>
+                <span class="s1">.thenAccept(</span>
+                        <span class="s1">material -&gt; {</span>
+                            <span class="s1">Vector3 vector3 = </span><span class="s0">new </span><span class="s1">Vector3(</span><span class="s4">0.05f</span><span class="s0">, </span><span class="s4">0.01f</span><span class="s0">, </span><span class="s4">0.01f</span><span class="s1">)</span><span class="s0">;</span>
+                            <span class="s1">cubeRenderable = ShapeFactory.makeCube(vector3</span><span class="s0">, </span><span class="s1">Vector3.zero()</span><span class="s0">, </span><span class="s1">material)</span><span class="s0">;</span>
+                            <span class="s1">cubeRenderable.setShadowCaster(</span><span class="s0">false</span><span class="s1">)</span><span class="s0">;</span>
+                            <span class="s1">cubeRenderable.setShadowReceiver(</span><span class="s0">false</span><span class="s1">)</span><span class="s0">;</span>
+                        <span class="s1">})</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">private void </span><span class="s1">clearAnchor() {</span>
+        <span class="s1">currentAnchor = </span><span class="s0">null;</span>
+
+
+        <span class="s0">if </span><span class="s1">(currentAnchorNode != </span><span class="s0">null</span><span class="s1">) {</span>
+            <span class="s1">arFragment.getArSceneView().getScene().removeChild(currentAnchorNode)</span><span class="s0">;</span>
+            <span class="s1">currentAnchorNode.getAnchor().detach()</span><span class="s0">;</span>
+            <span class="s1">currentAnchorNode.setParent(</span><span class="s0">null</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">currentAnchorNode = </span><span class="s0">null;</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+    <span class="s1">@Override</span>
+    <span class="s0">public void </span><span class="s1">onUpdate(FrameTime frameTime) {</span>
+        <span class="s1">Frame frame = arFragment.getArSceneView().getArFrame()</span><span class="s0">;</span>
+
+        <span class="s1">Log.d(</span><span class="s2">&quot;API123&quot;</span><span class="s0">, </span><span class="s2">&quot;onUpdateframe... current anchor node &quot; </span><span class="s1">+ (currentAnchorNode == </span><span class="s0">null</span><span class="s1">))</span><span class="s0">;</span>
+
+
+        <span class="s0">if </span><span class="s1">(currentAnchorNode != </span><span class="s0">null</span><span class="s1">) {</span>
+            <span class="s1">Pose objectPose = currentAnchor.getPose()</span><span class="s0">;</span>
+            <span class="s1">Pose cameraPose = frame.getCamera().getPose()</span><span class="s0">;</span>
+
+            <span class="s0">float </span><span class="s1">dx = objectPose.tx() - cameraPose.tx()</span><span class="s0">;</span>
+            <span class="s0">float </span><span class="s1">dy = objectPose.ty() - cameraPose.ty()</span><span class="s0">;</span>
+            <span class="s0">float </span><span class="s1">dz = objectPose.tz() - cameraPose.tz()</span><span class="s0">;</span>
+
+            <span class="s3">///Compute the straight-line distance.</span>
+            <span class="s0">float </span><span class="s1">distanceMeters = (</span><span class="s0">float</span><span class="s1">) Math.sqrt(dx * dx + dy * dy + dz * dz)</span><span class="s0">;</span>
+
+            <span class="s0">float</span><span class="s1">[] zcam = cameraPose.getZAxis()</span><span class="s0">;</span>
+            <span class="s0">float </span><span class="s1">g_x =  (objectPose.tx() - cameraPose.tx())</span><span class="s0">;</span>
+            <span class="s0">float </span><span class="s1">g_z= (objectPose.tz() - cameraPose.tz())</span><span class="s0">;</span>
+            <span class="s0">double </span><span class="s1">distance_left= Math.sqrt((g_z*g_z)+(g_x*g_x))</span><span class="s0">;</span>
+            <span class="s0">double </span><span class="s1">theta_g=Math.atan2(g_z</span><span class="s0">,</span><span class="s1">g_x)</span><span class="s0">;</span>
+            <span class="s0">double </span><span class="s1">theta_c= Math.atan2(-zcam[</span><span class="s4">2</span><span class="s1">]</span><span class="s0">,</span><span class="s1">-zcam[</span><span class="s4">0</span><span class="s1">])</span><span class="s0">;</span>
+            <span class="s0">double </span><span class="s1">w = (theta_g-theta_c)*</span><span class="s4">180</span><span class="s1">/</span><span class="s4">3.14</span><span class="s0">;</span>
+
+            <span class="s1">tvDistance.setText(df.format(distanceMeters) + </span><span class="s2">&quot; metres&quot; </span><span class="s1">+ df.format(w) + </span><span class="s2">&quot; degrees&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+
+<span class="s1">}</span></pre>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<html>
+<head>
+<title>Classifier.kt</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #6897bb;}
+.s3 { color: #6a8759;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Classifier.kt</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com.example.fyp</span>
+
+<span class="s1">import android.content.Context</span>
+<span class="s1">import android.os.Bundle</span>
+<span class="s1">import com.google.mlkit.common.model.LocalModel</span>
+<span class="s1">import com.google.mlkit.vision.common.InputImage</span>
+<span class="s1">import com.google.mlkit.vision.label.ImageLabeler</span>
+<span class="s1">import com.google.mlkit.vision.label.ImageLabeling</span>
+<span class="s1">import com.google.mlkit.vision.label.defaults.ImageLabelerOptions</span>
+<span class="s1">import com.otaliastudios.cameraview.Frame</span>
+<span class="s1">import java.io.File</span>
+<span class="s1">import java.io.InputStream</span>
+<span class="s1">import kotlin.coroutines.coroutineContext</span>
+
+<span class="s0">class </span><span class="s1">Classifier {</span>
+    <span class="s1">lateinit </span><span class="s0">var </span><span class="s1">labeler: ImageLabeler</span>
+    <span class="s1">lateinit </span><span class="s0">var </span><span class="s1">labelmap: String</span>
+
+    <span class="s1">public </span><span class="s0">fun </span><span class="s1">load_model(context: Context)</span>
+    <span class="s1">{</span>
+        <span class="s0">val </span><span class="s1">img = ImageLabelerOptions.Builder()</span>
+                <span class="s1">.setConfidenceThreshold(</span><span class="s2">0.7f</span><span class="s1">)</span>
+                <span class="s1">.build()</span>
+
+        <span class="s1">labeler = ImageLabeling.getClient(img)</span>
+
+        <span class="s1">labelmap = context.applicationContext.assets.open(</span><span class="s3">&quot;labelmap.txt&quot;</span><span class="s1">).bufferedReader().use {</span>
+            <span class="s1">it.readText()</span>
+        <span class="s1">}</span>
+
+    <span class="s1">}</span>
+
+    <span class="s1">public </span><span class="s0">fun </span><span class="s1">classify(input: InputImage </span><span class="s0">,</span><span class="s1">callback: (String) -&gt; Unit) {</span>
+
+        <span class="s0">var </span><span class="s1">result: String = </span><span class="s3">&quot;&quot;</span>
+        <span class="s0">var </span><span class="s1">temp: String = </span><span class="s3">&quot;&quot;</span>
+
+        <span class="s1">labeler.process(input)</span>
+                <span class="s1">.addOnSuccessListener { labels -&gt;</span>
+                    <span class="s0">for </span><span class="s1">(label </span><span class="s0">in </span><span class="s1">labels) {</span>
+                        <span class="s0">val </span><span class="s1">text = label.text</span>
+                        <span class="s0">val </span><span class="s1">confidence = label.confidence</span>
+                        <span class="s0">val </span><span class="s1">index = label.index</span>
+
+                        <span class="s0">if</span><span class="s1">(labelmap.contains(text))</span>
+                        <span class="s1">{</span>
+                            <span class="s1">result += text + </span><span class="s3">&quot;</span><span class="s0">\n</span><span class="s3">&quot;</span>
+                        <span class="s1">}</span>
+                    <span class="s1">}</span>
+                    <span class="s1">temp = result</span>
+                    <span class="s1">result = </span><span class="s3">&quot;&quot;</span>
+
+                    <span class="s1">callback(temp)</span>
+                <span class="s1">}</span>
+                <span class="s1">.addOnFailureListener { e -&gt;</span>
+
+                <span class="s1">}</span>
+
+    <span class="s1">}</span>
+<span class="s1">}</span></pre>
+</body>
+</html>

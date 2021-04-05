@@ -1,0 +1,55 @@
+<html>
+<head>
+<title>DetectionActivity.kt</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #6a8759;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+DetectionActivity.kt</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com.example.fyp</span>
+
+<span class="s1">import androidx.appcompat.app.AppCompatActivity</span>
+<span class="s1">import android.os.Bundle</span>
+<span class="s1">import com.google.ar.core.HitResult</span>
+<span class="s1">import com.google.ar.sceneform.rendering.Renderable</span>
+<span class="s1">import com.otaliastudios.cameraview.CameraView</span>
+<span class="s1">import kotlinx.android.synthetic.main.activity_detection.*</span>
+
+
+<span class="s0">class </span><span class="s1">DetectionActivity : AppCompatActivity() {</span>
+    <span class="s1">override </span><span class="s0">fun </span><span class="s1">onCreate(savedInstanceState: Bundle?) {</span>
+        <span class="s0">super</span><span class="s1">.onCreate(savedInstanceState)</span>
+        <span class="s1">setContentView(R.layout.activity_detection)</span>
+        <span class="s0">val </span><span class="s1">audio = Audio(</span><span class="s0">this,</span><span class="s2">&quot;en&quot;</span><span class="s0">,</span><span class="s2">&quot;GB&quot;</span><span class="s1">)</span>
+        <span class="s0">val </span><span class="s1">video = Video()</span>
+        <span class="s0">val </span><span class="s1">detector = Detector()</span>
+        <span class="s0">val </span><span class="s1">classifier = Classifier()</span>
+        <span class="s0">val </span><span class="s1">frameProcessor = FrameProcessor()</span>
+        <span class="s0">val </span><span class="s1">view = findViewById&lt;CameraView&gt;(R.id.cameraView)</span>
+        <span class="s1">detector.load_model()</span>
+        <span class="s1">classifier.load_model(applicationContext)</span>
+        <span class="s1">video.video_capture(view</span><span class="s0">,this</span><span class="s1">)</span>
+        <span class="s1">view.addFrameProcessor {</span>
+            <span class="s0">val </span><span class="s1">image = frameProcessor.prepare_frame(it)</span>
+            <span class="s1">detector.detect(image)</span>
+            <span class="s1">classifier.classify(image){  result -&gt;</span>
+                <span class="s1">tvDetectedObject.text = result</span>
+                <span class="s1">audio.generate_audio(result)</span>
+            <span class="s1">}</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+
+
+<span class="s1">}</span>
+</pre>
+</body>
+</html>

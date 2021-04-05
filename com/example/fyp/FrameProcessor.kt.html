@@ -1,0 +1,33 @@
+<html>
+<head>
+<title>FrameProcessor.kt</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #808080;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+FrameProcessor.kt</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com.example.fyp</span>
+
+<span class="s1">import com.google.mlkit.vision.common.InputImage</span>
+<span class="s1">import com.otaliastudios.cameraview.Frame</span>
+
+<span class="s0">class </span><span class="s1">FrameProcessor</span>
+<span class="s1">{</span>
+    <span class="s1">public </span><span class="s0">fun </span><span class="s1">prepare_frame(frame: Frame): InputImage</span>
+    <span class="s1">{</span>
+        <span class="s2">//ByteArray for the captured frame</span>
+        <span class="s0">val </span><span class="s1">data = frame.data</span>
+        <span class="s0">val </span><span class="s1">image = InputImage.fromByteArray(data</span><span class="s0">, </span><span class="s1">frame.size.width</span><span class="s0">, </span><span class="s1">frame.size.height</span><span class="s0">, </span><span class="s1">frame.rotation</span><span class="s0">, </span><span class="s1">InputImage.IMAGE_FORMAT_NV21)</span>
+        <span class="s0">return </span><span class="s1">image</span>
+    <span class="s1">}</span>
+<span class="s1">}</span></pre>
+</body>
+</html>

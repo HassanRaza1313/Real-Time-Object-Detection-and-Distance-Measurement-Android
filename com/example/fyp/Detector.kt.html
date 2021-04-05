@@ -1,0 +1,77 @@
+<html>
+<head>
+<title>Detector.kt</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #6a8759;}
+.s3 { color: #6897bb;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Detector.kt</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com.example.fyp</span>
+
+<span class="s1">import android.graphics.Rect</span>
+<span class="s1">import com.google.mlkit.common.model.LocalModel</span>
+<span class="s1">import com.google.mlkit.vision.common.InputImage</span>
+<span class="s1">import com.google.mlkit.vision.objects.ObjectDetection</span>
+<span class="s1">import com.google.mlkit.vision.objects.ObjectDetector</span>
+<span class="s1">import com.google.mlkit.vision.objects.custom.CustomObjectDetectorOptions</span>
+<span class="s1">import com.google.mlkit.vision.objects.defaults.ObjectDetectorOptions</span>
+<span class="s1">import com.otaliastudios.cameraview.Frame</span>
+
+<span class="s0">class </span><span class="s1">Detector {</span>
+
+    <span class="s1">lateinit </span><span class="s0">var </span><span class="s1">objectDetector: ObjectDetector</span>
+
+    <span class="s1">public </span><span class="s0">fun </span><span class="s1">load_model()</span>
+    <span class="s1">{</span>
+        <span class="s0">val </span><span class="s1">options = ObjectDetectorOptions.Builder()</span>
+                <span class="s1">.setDetectorMode(ObjectDetectorOptions.STREAM_MODE)</span>
+                <span class="s1">.build()</span>
+        <span class="s1">objectDetector = ObjectDetection.getClient(options)</span>
+    <span class="s1">}</span>
+
+    <span class="s1">public </span><span class="s0">fun </span><span class="s1">load_custom_model()</span>
+    <span class="s1">{</span>
+        <span class="s0">val </span><span class="s1">localModel = LocalModel.Builder()</span>
+            <span class="s1">.setAssetFilePath(</span><span class="s2">&quot;detect.tflite&quot;</span><span class="s1">)</span>
+            <span class="s1">.build()</span>
+
+        <span class="s0">val </span><span class="s1">customObjectDetectorOptions =</span>
+            <span class="s1">CustomObjectDetectorOptions.Builder(localModel)</span>
+                <span class="s1">.setDetectorMode(CustomObjectDetectorOptions.STREAM_MODE)</span>
+                <span class="s1">.enableClassification()</span>
+                <span class="s1">.setClassificationConfidenceThreshold(</span><span class="s3">0.6f</span><span class="s1">)</span>
+                <span class="s1">.setMaxPerObjectLabelCount(</span><span class="s3">5</span><span class="s1">)</span>
+                <span class="s1">.build()</span>
+
+        <span class="s0">val </span><span class="s1">objectDetector =</span>
+            <span class="s1">ObjectDetection.getClient(customObjectDetectorOptions)</span>
+    <span class="s1">}</span>
+
+    <span class="s1">public </span><span class="s0">fun </span><span class="s1">detect(input: InputImage): Rect {</span>
+
+        <span class="s0">var </span><span class="s1">result = Rect(</span><span class="s3">0</span><span class="s0">,</span><span class="s3">0</span><span class="s0">,</span><span class="s3">0</span><span class="s0">,</span><span class="s3">0</span><span class="s1">)</span>
+        <span class="s1">objectDetector.process(input)</span>
+                <span class="s1">.addOnSuccessListener { detectedObjects -&gt;</span>
+                    <span class="s0">for </span><span class="s1">(detectedObject </span><span class="s0">in </span><span class="s1">detectedObjects) {</span>
+                        <span class="s0">val </span><span class="s1">boundingBox = detectedObject.boundingBox</span>
+                        <span class="s0">val </span><span class="s1">trackingId = detectedObject.trackingId</span>
+                        <span class="s1">result = boundingBox</span>
+                    <span class="s1">}</span>
+                <span class="s1">}</span>
+                <span class="s1">.addOnFailureListener { e -&gt;</span>
+                <span class="s1">}</span>
+
+        <span class="s0">return </span><span class="s1">result</span>
+    <span class="s1">}</span>
+<span class="s1">}</span></pre>
+</body>
+</html>
