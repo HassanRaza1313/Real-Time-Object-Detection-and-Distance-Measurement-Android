@@ -93,10 +93,15 @@ Using the phone's camera, the application detects and classifies the objects aro
 ### Prerequisites
 
 This application only works with AR-compatible phones. To see the list of AR compatible phones, visit the link.
-* npm
-  ```sh
+
+```sh
   https://developers.google.com/ar/discover/supported-devices
   ```
+You need to install Google Play Services for AR to run this app. To download it, visit the link:
+```sh
+ https://play.google.com/store/apps/details?id=com.google.ar.core&hl=en&gl=US
+  ```
+  
 
 ### Installation
 
