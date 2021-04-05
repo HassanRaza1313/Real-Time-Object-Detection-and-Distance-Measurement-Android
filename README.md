@@ -68,7 +68,9 @@
 
 Blind Vision is an android application that will help blind and visually impaired people commute in recreational areas such as parks, restaurants, etc. by making them aware of their environment. BlindVision is a user-friendly application that the blind person can easily access and use without any human intervention. My application will become the third eye for the blind/visually impaired person.
 
-The Problem is that blind and visually impaired people commute and travel in their day to day lives with the help of walking sticks or human companions. It's impact is that it reduces the blind person's ability to perform daily tasks and can affect the ability to interact with the surrounding world. My application for both blind and visually impaired people in an easily accessible way to commute and travel in their day-to-day lives. My application provides an effective, efficient and human-friendly solution to the problem. Using the phone's camera, the application detects and classifies the objects around the blind person and informs them via audio. The application also prives a mechanism to calculate real-time distance and angle from a point in the real world by tapping on the screen.
+The Problem is that blind and visually impaired people commute and travel in their day to day lives with the help of walking sticks or human companions. It's impact is that it reduces the blind person's ability to perform daily tasks and can affect the ability to interact with the surrounding world. My application for both blind and visually impaired people in an easily accessible way to commute and travel in their day-to-day lives. My application provides an effective, efficient and human-friendly solution to the problem. 
+
+Using the phone's camera, the application detects and classifies the objects around the blind person and informs them via audio. The application also prives a mechanism to calculate real-time distance and angle from a point in the real world by tapping on the screen.
 
 ### Built With
 
@@ -90,10 +92,10 @@ The Problem is that blind and visually impaired people commute and travel in the
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
+This application only works with AR-compatible phones. To see the list of AR compatible phones, visit the link.
 * npm
   ```sh
-  npm install npm@latest -g
+  https://developers.google.com/ar/discover/supported-devices
   ```
 
 ### Installation
