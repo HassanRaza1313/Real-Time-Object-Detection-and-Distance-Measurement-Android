@@ -47,7 +47,6 @@
       <a href="#getting-started">Getting Started</a>
       <ul>
         <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
@@ -112,13 +111,13 @@ This application uses the following dependencies:
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-<img src="images/start.png" alt="Logo" width="700" height="700">
-<img src="images/logo.png" alt="Logo" width="700" height="700">
-<img src="images/logo.png" alt="Logo" width="700" height="700">
-<img src="images/logo.png" alt="Logo" width="700" height="700">
-<img src="images/logo.png" alt="Logo" width="700" height="700">
-<img src="images/logo.png" alt="Logo" width="700" height="700">
-<img src="images/logo.png" alt="Logo" width="700" height="700">
+<img src="images/Start.png" alt="Logo" width="700" height="700">
+<img src="images/Choice.png" alt="Logo" width="700" height="700">
+<img src="images/Detection 1.png" alt="Logo" width="700" height="700">
+<img src="images/Detection 2.png" alt="Logo" width="700" height="700">
+<img src="images/Detection 3.png" alt="Logo" width="700" height="700">
+<img src="images/Distance1.png" alt="Logo" width="700" height="700">
+<img src="images/Distance23.png" alt="Logo" width="700" height="700">
 
 
 <!-- ROADMAP -->
