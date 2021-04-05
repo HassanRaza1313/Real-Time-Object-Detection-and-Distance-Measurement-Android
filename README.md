@@ -64,8 +64,6 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
-
 Blind Vision is an android application that will help blind and visually impaired people commute in recreational areas such as parks, restaurants, etc. by making them aware of their environment. BlindVision is a user-friendly application that the blind person can easily access and use without any human intervention. My application will become the third eye for the blind/visually impaired person.
 
 The Problem is that blind and visually impaired people commute and travel in their day to day lives with the help of walking sticks or human companions. It's impact is that it reduces the blind person's ability to perform daily tasks and can affect the ability to interact with the surrounding world. My application for both blind and visually impaired people in an easily accessible way to commute and travel in their day-to-day lives. My application provides an effective, efficient and human-friendly solution to the problem. 
@@ -101,8 +99,7 @@ You need to install Google Play Services for AR to run this app. To download it,
 ```sh
  https://play.google.com/store/apps/details?id=com.google.ar.core&hl=en&gl=US
   ```
-  
-
+  This application uses the following dependencies for its 
 ### Installation
 
 1. Get a free API Key at [https://example.com](https://example.com)
