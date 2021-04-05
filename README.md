@@ -95,36 +95,30 @@ This application only works with AR-compatible phones. To see the list of AR com
 ```sh
   https://developers.google.com/ar/discover/supported-devices
   ```
+
 You need to install Google Play Services for AR to run this app. To download it, visit the link:
 ```sh
  https://play.google.com/store/apps/details?id=com.google.ar.core&hl=en&gl=US
   ```
-  This application uses the following dependencies for its 
-### Installation
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
-   ```sh
-   git clone https://github.com/your_username_/Project-Name.git
-   ```
-3. Install NPM packages
-   ```sh
-   npm install
-   ```
-4. Enter your API in `config.js`
-   ```JS
-   const API_KEY = 'ENTER YOUR API';
-   ```
-
-
-
+This application uses the following dependencies:
+  ```sh
+    implementation 'com.google.mlkit:object-detection:16.2.2'
+    implementation 'com.google.mlkit:object-detection-custom:16.3.1'
+    implementation 'com.google.mlkit:image-labeling:17.0.1'
+    implementation 'com.google.ar.sceneform.ux:sceneform-ux:1.10.0'
+  ```
+  
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
-
+<img src="images/start.png" alt="Logo" width="700" height="700">
+<img src="images/logo.png" alt="Logo" width="700" height="700">
+<img src="images/logo.png" alt="Logo" width="700" height="700">
+<img src="images/logo.png" alt="Logo" width="700" height="700">
+<img src="images/logo.png" alt="Logo" width="700" height="700">
+<img src="images/logo.png" alt="Logo" width="700" height="700">
+<img src="images/logo.png" alt="Logo" width="700" height="700">
 
 
 <!-- ROADMAP -->
