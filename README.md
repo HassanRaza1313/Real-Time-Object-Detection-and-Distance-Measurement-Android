@@ -20,7 +20,7 @@
 <br />
 <p align="center">
   <a href=" HassanRaza1313/Real-Time-Object-Detection-and-Distance-Measurement-Android (github.com)">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+    <img src="images/logo.png" alt="Logo" width="160" height="160">
   </a>
 
   <h3 align="center">BlindVision</h3>
@@ -66,23 +66,16 @@
 
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
 
-There are many great README templates available on GitHub, however, I didn't find one that really suit my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need -- I think this is it.
+Blind Vision is an android application that will help blind and visually impaired people commute in recreational areas such as parks, restaurants, etc. by making them aware of their environment. BlindVision is a user-friendly application that the blind person can easily access and use without any human intervention. My application will become the third eye for the blind/visually impaired person.
 
-Here's why:
-* Your time should be focused on creating something amazing. A project that solves a problem and helps others
-* You shouldn't be doing the same tasks over and over like creating a README from scratch
-* You should element DRY principles to the rest of your life :smile:
-
-Of course, no one template will serve all projects since your needs may be different. So I'll be adding more in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue. Thanks to all the people have have contributed to expanding this template!
-
-A list of commonly used resources that I find helpful are listed in the acknowledgements.
+The Problem is that blind and visually impaired people commute and travel in their day to day lives with the help of walking sticks or human companions. It's impact is that it reduces the blind person's ability to perform daily tasks and can affect the ability to interact with the surrounding world. My application for both blind and visually impaired people in an easily accessible way to commute and travel in their day-to-day lives. My application provides an effective, efficient and human-friendly solution to the problem. Using the phone's camera, the application detects and classifies the objects around the blind person and informs them via audio. The application also prives a mechanism to calculate real-time distance and angle from a point in the real world by tapping on the screen.
 
 ### Built With
 
-This section should list any major frameworks that you built your project using. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
-* [Bootstrap](https://getbootstrap.com)
-* [JQuery](https://jquery.com)
-* [Laravel](https://laravel.com)
+* [Android Studio](https://developer.android.com/studio)
+* [Tensorflow](https://www.tensorflow.org)
+* [Google ML Kit](https://developers.google.com/ml-kit)
+* [Google ARCore](https://developers.google.com/ar)
 
 
 
